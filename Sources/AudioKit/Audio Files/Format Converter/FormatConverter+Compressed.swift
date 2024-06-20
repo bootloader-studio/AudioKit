@@ -40,13 +40,15 @@ extension FormatConverter {
                 return
             }
 
-            Task{
+            if #available(visionOS 2.0, *) {
+                Task{
                     do{
 						try await session.export(to: outputURL, as: outputFileType)
 					}catch {
 						completionHandler?(error)
 					}
                 }
+            }
         }
     }
 
